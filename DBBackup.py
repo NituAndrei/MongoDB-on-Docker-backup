@@ -1,5 +1,4 @@
 import sys
-import ast
 from pymongo import MongoClient
 
 def Backup(players):
