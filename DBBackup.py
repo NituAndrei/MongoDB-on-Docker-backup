@@ -1,6 +1,7 @@
 import sys
 from pymongo import MongoClient
 
+
 def Backup(players):
 
     output = open('output', 'w')  # open the output file
@@ -22,9 +23,12 @@ def Backup(players):
         output.write(outputString)
         output.write('\n')  # separates players
 
-def Restore(playersCol):
+
+def Restore(mongoClient):  # playersCol
     file = open('output')
     penguins = file.read()
+    db = mongoClient[sys.argv[1]+'Restore']
+    playersCol = db['players']
 
     penguins = penguins.split('\n')  # split the string into dictKeys + individual players
     dictKeys = penguins[0].split('---')  # get the dictionary keys
@@ -41,6 +45,7 @@ def Restore(playersCol):
         playersCol.insert_one(playersDictCopy)  # insert the dictionary in the database
         print('inserted', playersDictCopy)
 
+
 while True:
     client = MongoClient()
     db = client[sys.argv[1]]  # get the db whose name we parsed to the script
@@ -53,6 +58,6 @@ while True:
     if(selector == '1'):
         Backup(players)
     elif(selector == '2'):
-        Restore(playersCol)
+        Restore(client)
     else:
         break

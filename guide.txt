@@ -1,7 +1,7 @@
 1.: Pull the mongo docker image mongo:4.0.9 (docker pull mongo:4.0.9)(?)
 2.: Start the mongo container with the command: docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.9
 3.: In powershell, execute: python -m pip install pymongo
-4.: Populate mongo data by running DBPopulate.py (powershell command: python DBPopulate.py)
+4.: Populate mongo database by running DBPopulate.py (powershell command: python DBPopulate.py, reads data from penguins_players.json)
 5.: In powershell, execute "python DBBackup.py x", where x is the name of the database we're backing up (in this case, x='Penguins')
 6.: Choose an option as displayed in the console
 7.: If you chose option 1, the backed up data is found in "output", in the same folder as the script
