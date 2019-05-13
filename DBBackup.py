@@ -43,7 +43,6 @@ def Restore(mongoClient):  # playersCol
             playersDictCopy[key] = player[i]  # insert values in the dictionary
             i+=1
         playersCol.insert_one(playersDictCopy)  # insert the dictionary in the database
-        print('inserted', playersDictCopy)
 
 
 while True:
@@ -53,7 +52,7 @@ while True:
 
     players = playersCol.find()  # extract all players from the database
 
-    print('press 1 to backup\n' + 'press 2 to restore\n' + 'press anything else to exit\n')
+    print('enter 1 to backup\n' + 'enter 2 to restore\n' + 'enter anything else to exit\n')
     selector = input()
     if(selector == '1'):
         Backup(players)
