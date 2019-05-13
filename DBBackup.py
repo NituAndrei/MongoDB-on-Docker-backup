@@ -41,7 +41,6 @@ def Restore(mongoClient):  # playersCol
         i=0
         for key in playersDictCopy:
             if key == 'id' or key == 'weight' or key == 'age' or key == 'number':
-                print(key, player[i])
                 playersDictCopy[key] = int(player[i])
                 i+=1
                 continue
