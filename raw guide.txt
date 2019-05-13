@@ -1,0 +1,18 @@
+11.5.2019
+
+docker pull mongo:4.0.9
+/*
+docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.9
+docker stop mongodb
+docker rm mongodb
+docker ps -a
+docker exec -it mongodb bash
+*/
+
+/*
+python:
+python test.py argument
+python -m pip install pymongo
+python DBBackup.py Penguins
+*/
+

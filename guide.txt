@@ -1,0 +1,5 @@
+1.: Pull the mongo docker image mongo:4.0.9 (docker pull mongo:4.0.9)(?)
+2.: Start the mongo container with the command: docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.9
+?.: In powershell, execute: python -m pip install pymongo
+?.: Populate mongo data by running DBPopulate.py (powershell command: python DBPopulate.py)
+?.: in powershell, execute "python DBBackup.py x", where x is the name of the database we're backing up (in my case, x='Penguins')
