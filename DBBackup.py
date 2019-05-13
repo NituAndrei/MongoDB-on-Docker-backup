@@ -2,7 +2,7 @@ import sys
 import ast
 from pymongo import MongoClient
 
-def Backup(players): #todo: compress
+def Backup(players):
 
     output = open('output', 'w')  # open the output file
 
@@ -13,42 +13,34 @@ def Backup(players): #todo: compress
     output.write('\n')
 
     for player in players:  # writes the actual data, without the keys to reduce output size
-        outputString = ''
+        outputString = ''  # initialize the string which will be written to disk
         for dictValue in player:
             if dictValue == '_id':
                 continue
             outputString += (str(player[dictValue]))
-            outputString += ('---')
+            outputString += ('---')  # separates values
         outputString = outputString[0:len(outputString)-3]
         output.write(outputString)
-        output.write('\n')
+        output.write('\n')  # separates players
 
-def Restore(playersCol):#todo: modify for compressed data
-    file = open('output') #todo: replace
+def Restore(playersCol):
+    file = open('output')
     penguins = file.read()
 
-    penguins = penguins.split('\n')  # split the string into individual players individual players (and the dictKeys)
+    penguins = penguins.split('\n')  # split the string into dictKeys + individual players
     dictKeys = penguins[0].split('---')  # get the dictionary keys
     playersDict = dict.fromkeys(dictKeys)  # initialize the dictionary
-    penguins = penguins[1:len(penguins)-1]
+    penguins = penguins[1:len(penguins)-1]  # ignore the first line, which was used in the previous line
 
     for player in penguins:
         player = player.split('---')
+        playersDictCopy = playersDict.copy()
         i=0
-        for key in playersDict:
-            playersDict[key] = player[i]
+        for key in playersDictCopy:
+            playersDictCopy[key] = player[i]  # insert values in the dictionary
             i+=1
-        playersCol.insert_one(playersDict)
-    # penguins = penguins.split('},')
-    # for i in range(len(penguins) - 1):
-    #     penguins[i] = penguins[i] + '}'
-    #
-    # # adding the data to penguinsDict
-    # penguinsDict = []
-    # for i in range(len(penguins)):
-    #     print(penguins[i])
-    #     penguinsDict.append(ast.literal_eval(penguins[i]))
-    # print(penguinsDict[0])
+        playersCol.insert_one(playersDictCopy)  # insert the dictionary in the database
+        print('inserted', playersDictCopy)
 
 while True:
     client = MongoClient()
@@ -57,7 +49,6 @@ while True:
 
     players = playersCol.find()  # extract all players from the database
 
-    Restore(playersCol) #todo: remove this
     print('press 1 to backup\n' + 'press 2 to restore\n' + 'press anything else to exit\n')
     selector = input()
     if(selector == '1'):
