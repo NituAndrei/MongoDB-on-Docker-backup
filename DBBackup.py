@@ -40,6 +40,11 @@ def Restore(mongoClient):  # playersCol
         playersDictCopy = playersDict.copy()
         i=0
         for key in playersDictCopy:
+            if key == 'id' or key == 'weight' or key == 'age' or key == 'number':
+                print(key, player[i])
+                playersDictCopy[key] = int(player[i])
+                i+=1
+                continue
             playersDictCopy[key] = player[i]  # insert values in the dictionary
             i+=1
         playersCol.insert_one(playersDictCopy)  # insert the dictionary in the database
