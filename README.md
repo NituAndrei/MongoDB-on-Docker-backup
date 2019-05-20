@@ -1,12 +1,19 @@
 # MongoDB on Docker backup
 
-#How to run
+# How to run
 
 1.: Pull the mongo docker image mongo:4.0.9 (powershell command: docker pull mongo:4.0.9)
+
 2.: Start the mongo container with the command: docker run -d -p 27017-27019:27017-27019 --name mongodb mongo:4.0.9
+
 3.: In powershell, execute: python -m pip install pymongo (if it isn't already installed)
+
 4.: Populate mongo database by running DBPopulate.py, powershell command: python DBPopulate.py (reads data from penguins_players.json)
+
 5.: In powershell, execute: python DBBackup.py Penguins
+
 6.: Choose an option as displayed in the console
+
 7.: If you choose option 1, the backed up data is found in "output", in the same folder as the script
+
 8.: Option 2 inserts the data found in "output" back in a database whose name is the name we passed as an argument + "Restore" (so PenguinsRestore)
