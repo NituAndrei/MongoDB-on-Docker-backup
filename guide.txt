@@ -5,4 +5,4 @@
 5.: In powershell, execute: python DBBackup.py Penguins
 6.: Choose an option as displayed in the console
 7.: If you choose option 1, the backed up data is found in "output", in the same folder as the script
-8.: Option 2 inserts the data found in "output" back in a database whose name is the name we passed as an argument + "Restore"
+8.: Option 2 inserts the data found in "output" back in a database whose name is the name we passed as an argument + "Restore" (so PenguinsRestore)
